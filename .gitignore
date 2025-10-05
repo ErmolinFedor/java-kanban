@@ -1,5 +1,27 @@
 # Compiled class file
 *.class
+history/
+build/
+.idea/
+.allure/
+config/
+*.iml
+*.iws
+*.ipr
+.DS_Store
+log/
+target/
+out/
+node_modules/
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+.gradle/
+.vscode/
+/.mvn/
+/src/main/resources/reportportal.properties
 
 # Log file
 *.log
