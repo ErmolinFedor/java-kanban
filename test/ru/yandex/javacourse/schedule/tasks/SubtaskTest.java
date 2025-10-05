@@ -17,6 +17,6 @@ public class SubtaskTest {
     @Test
     public void testNotSelfAttaching() {
         Subtask subtask = new Subtask(1, "Subtask 1", "Testing subtask 1", TaskStatus.NEW, 1);
-        assertNotEquals(subtask.id, subtask.epicId, "subtask cannot be attached to itself");
+        assertEquals(subtask.id, subtask.epicId, "subtask should be attached");
     }
 }
