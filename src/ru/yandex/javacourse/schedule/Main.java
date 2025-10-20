@@ -78,6 +78,7 @@ public class Main {
 				System.out.println("--> " + t);
 			}
 		}
+		printAllHistory(manager);
 
 		// Удаление
 		System.out.println("DELETE: Task1");
@@ -105,6 +106,13 @@ public class Main {
 			System.out.println(subtask);
 		}
 
+		System.out.println("История:");
+		for (Task task : manager.getHistory()) {
+			System.out.println(task);
+		}
+	}
+
+	private static void printAllHistory(TaskManager manager) {
 		System.out.println("История:");
 		for (Task task : manager.getHistory()) {
 			System.out.println(task);

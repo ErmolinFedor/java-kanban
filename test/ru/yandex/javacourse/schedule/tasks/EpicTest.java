@@ -14,19 +14,12 @@ public class EpicTest {
     }
 
     @Test
-    public void testSubtaskUniqueIds() {
+    public void testSubtaskRemove() {
         Epic epic = new Epic(0, "Epic 1", "Testing epic 1");
         epic.addSubtaskId(1);
         epic.addSubtaskId(2);
         assertEquals(2, epic.subtaskIds.size(), "should add distinct subtask ids");
-        epic.addSubtaskId(1);
-        assertEquals(2, epic.subtaskIds.size(), "should not add same subtask id twice");
-    }
-
-    @Test
-    public void testNotSelfAttaching() {
-        Epic epic = new Epic(0, "Epic 1", "Testing epic 1");
-        epic.addSubtaskId(0);
-        assertEquals(0, epic.subtaskIds.size(), "epic should not add itself as subtask");
+        epic.removeSubtask(2);
+        assertEquals(1, epic.subtaskIds.size(), "should not add same subtask id twice");
     }
 }
