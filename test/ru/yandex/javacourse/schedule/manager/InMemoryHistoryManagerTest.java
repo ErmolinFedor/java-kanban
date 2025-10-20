@@ -45,7 +45,6 @@ public class InMemoryHistoryManagerTest {
         Task task1 = new Task(1,"Test 1", "Testing task 1", TaskStatus.NEW);
         historyManager.add(task1);
         assertEquals(1, historyManager.getHistory().size(), "historic task should be added");
-        historyManager.getHistory();
         Task task2 = new Task(2,"Test 2", "Testing task 2", TaskStatus.NEW);
         historyManager.add(task2);
         assertEquals(2, historyManager.getHistory().size(), "historic task should be added");
@@ -53,5 +52,4 @@ public class InMemoryHistoryManagerTest {
         assertEquals(1, historyManager.getHistory().size(), "historic task should be removed");
         assertEquals(task2, historyManager.getHistory().getFirst(), "historic task should be equals");
     }
-
 }
