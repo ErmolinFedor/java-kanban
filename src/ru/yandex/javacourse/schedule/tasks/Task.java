@@ -7,6 +7,7 @@ public class Task {
 	protected String name;
 	protected TaskStatus status;
 	protected String description;
+	private final TaskType taskType = TaskType.TASK;
 
 	public Task(int id, String name, String description, TaskStatus status) {
 		this.id = id;
@@ -75,4 +76,8 @@ public class Task {
 				", description='" + description + '\'' +
 				'}';
 	}
+
+  public TaskType getTaskType() {
+    return taskType;
+  }
 }

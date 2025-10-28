@@ -8,12 +8,18 @@ import java.util.List;
 public class Epic extends Task {
 	protected ArrayList<Integer> subtaskIds = new ArrayList<>();
 
+	private final TaskType taskType = TaskType.EPIC;
+
 	public Epic(int id, String name, String description) {
 		super(id, name, description, NEW);
 	}
 
 	public Epic(String name, String description) {
 		super(name, description, NEW);
+	}
+
+	public Epic(int id, String name, String description, TaskStatus status) {
+		super(id, name, description, status);
 	}
 
 	public void addSubtaskId(int id) {
@@ -42,4 +48,9 @@ public class Epic extends Task {
 				", subtaskIds=" + subtaskIds +
 				'}';
 	}
+
+  @Override
+  public TaskType getTaskType() {
+    return taskType;
+  }
 }
