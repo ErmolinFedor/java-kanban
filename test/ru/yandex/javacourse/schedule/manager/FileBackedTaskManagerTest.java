@@ -21,21 +21,21 @@ public class FileBackedTaskManagerTest {
 
   @BeforeEach
   void init() throws IOException, IllegalAccessException, NoSuchFieldException {
-    taskManager = new FileBackedTaskManager();
     file = File.createTempFile("taskTmp", ".csv");
-
-    Field field = taskManager.getClass().getDeclaredField("file");
-    field.setAccessible(true);
-    field.set(taskManager, file);
+    taskManager = FileBackedTaskManager.loadFromFile(file);
 
     Task task = new Task("Task1", "Description task1", TaskStatus.NEW);
     taskManager.addNewTask(task);
     Epic epic = new Epic("Epic1", "Description epic1");
     taskManager.addNewEpic(epic);
     Subtask subtask = new Subtask("Subtask #1-1", "Description sub task#1-1", NEW, epic.getId());
-    taskManager.addNewSubtask(subtask);
+    Integer newSubtask = taskManager.addNewSubtask(subtask);
     Subtask subtask1 = new Subtask("Subtask #2-1", "Description sub task#2-1", DONE, epic.getId());
-    taskManager.addNewSubtask(subtask1);
+    Integer newSubtask1 = taskManager.addNewSubtask(subtask1);
+    taskManager.getTask(task.getId());
+    taskManager.getEpic(epic.getId());
+    taskManager.getSubtask(newSubtask);
+    taskManager.getSubtask(newSubtask1);
   }
 
   @Test
