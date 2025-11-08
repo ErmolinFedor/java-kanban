@@ -13,7 +13,7 @@ import ru.yandex.javacourse.schedule.tasks.Task;
 public class Main {
 	public static void main(String[] args) {
 
-		TaskManager manager = Managers.getDefault();
+		TaskManager manager = Managers.getSaveHistory();
 
 		// Создание
 		Task task1 = new Task("Task #1", "Task1 description", NEW);
