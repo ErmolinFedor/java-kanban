@@ -1,7 +1,7 @@
-id,type,name,status,description,epic
-1,TASK,Task1,NEW,Description task1,
-2,EPIC,Epic1,IN_PROGRESS,Description epic1,
-3,SUBTASK,Subtask #1-1,NEW,Description sub task#1-1,2
-4,SUBTASK,Subtask #2-1,DONE,Description sub task#2-1,2
+id,type,name,status,description,epic,startTime,duration
+1,TASK,Test 1,NEW,Testing task 1,2026-01-01T00:00,15,
+2,EPIC,Epic 1,NEW,Testing epic 1,2026-01-01T00:15,30,
+3,SUBTASK,SubTask 1,NEW,Testing SubTask 1,2026-01-01T00:15,15,2
+4,SUBTASK,SubTask 2,NEW,Testing SubTask 2,2026-01-01T00:30,15,2
 
 1,2,3,4

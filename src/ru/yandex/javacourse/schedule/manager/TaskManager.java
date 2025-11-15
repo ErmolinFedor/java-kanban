@@ -51,4 +51,10 @@ public interface TaskManager {
 	void deleteEpics();
 
 	List<Task> getHistory();
+
+	void setEpicDateTime(int epicId);
+
+	List<Task> getPrioritizedTasks();
+
+	boolean validate(Task newTask);
 }
