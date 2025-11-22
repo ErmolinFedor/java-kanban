@@ -1,9 +1,11 @@
 package ru.yandex.javacourse.schedule.manager;
 
 import static ru.yandex.javacourse.schedule.tasks.TaskSaver.DESCRIPTION;
+import static ru.yandex.javacourse.schedule.tasks.TaskSaver.DURATION;
 import static ru.yandex.javacourse.schedule.tasks.TaskSaver.EPIC;
 import static ru.yandex.javacourse.schedule.tasks.TaskSaver.ID;
 import static ru.yandex.javacourse.schedule.tasks.TaskSaver.NAME;
+import static ru.yandex.javacourse.schedule.tasks.TaskSaver.START_TIME;
 import static ru.yandex.javacourse.schedule.tasks.TaskSaver.STATUS;
 import static ru.yandex.javacourse.schedule.tasks.TaskSaver.TYPE;
 
@@ -15,6 +17,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +33,7 @@ import ru.yandex.javacourse.schedule.tasks.TaskType;
 public class FileBackedTaskManager extends InMemoryTaskManager {
 
   File file;
-  private static final String FIRST_LINE = "id,type,name,status,description,epic";
+  private static final String FIRST_LINE = "id,type,name,status,description,epic,startTime,duration";
 
   public static FileBackedTaskManager getDeafaultFileBackedTaskManager() {
     File file = new File("./resources/tasks.csv");
@@ -129,18 +132,21 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
   }
 
   private String toString(Task task) {
-    return String.format("%d,%S,%s,%s,%s,", task.getId(), task.getTaskType(),
-        task.getName(), task.getStatus(), task.getDescription());
+    return String.format("%d,%S,%s,%s,%s,%s,%s,", task.getId(), task.getTaskType(),
+        task.getName(), task.getStatus(), task.getDescription(), task.getStartTime(),
+        task.getDuration());
   }
 
   private String toString(Epic epic) {
-    return String.format("%d,%S,%s,%s,%s,", epic.getId(), epic.getTaskType(),
-        epic.getName(), epic.getStatus(), epic.getDescription());
+    return String.format("%d,%S,%s,%s,%s,%s,%s,", epic.getId(), epic.getTaskType(),
+        epic.getName(), epic.getStatus(), epic.getDescription(), epic.getStartTime(),
+        epic.getDuration());
   }
 
   private String toString(Subtask subtask) {
-    return String.format("%d,%S,%s,%s,%s,%s", subtask.getId(), subtask.getTaskType(),
-        subtask.getName(), subtask.getStatus(), subtask.getDescription(), subtask.getEpicId());
+    return String.format("%d,%S,%s,%s,%s,%s,%s,%s", subtask.getId(), subtask.getTaskType(),
+        subtask.getName(), subtask.getStatus(), subtask.getDescription(),
+        subtask.getStartTime(), subtask.getDuration(), subtask.getEpicId());
   }
 
   private static Task fromString(String[] line) {
@@ -149,12 +155,14 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     String name = line[NAME.getIndex()];
     TaskStatus status = TaskStatus.valueOf(line[STATUS.getIndex()]);
     String description = line[DESCRIPTION.getIndex()];
+    LocalDateTime startTime = LocalDateTime.parse(line[START_TIME.getIndex()]);
+    long duration = Long.parseLong(line[DURATION.getIndex()]);
     return switch (taskType) {
-      case TASK -> new Task(id, name, description, status);
-      case EPIC -> new Epic(id, name, description, status);
+      case TASK -> new Task(id, name, description, status, startTime, duration);
+      case EPIC -> new Epic(id, name, description, status, startTime, duration);
       case SUBTASK -> {
         int epicId = Integer.parseInt(line[EPIC.getIndex()]);
-        yield new Subtask(id, name, description, status, epicId);
+        yield new Subtask(id, name, description, status, epicId, startTime, duration);
       }
     };
   }
@@ -287,9 +295,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     return super.getEpic(id);
   }
 
-//  @Override
-//  public List<Task> getHistory() {
-//    save();
-//    return super.getHistory();
-//  }
+  public void setEpicDateTime(int epicId) {
+    super.setEpicDateTime(epicId);
+    save();
+  }
 }

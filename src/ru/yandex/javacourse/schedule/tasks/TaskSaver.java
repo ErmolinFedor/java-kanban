@@ -6,7 +6,9 @@ public enum TaskSaver {
   NAME(2),
   STATUS(3),
   DESCRIPTION(4),
-  EPIC(5);
+  START_TIME(5),
+  DURATION(6),
+  EPIC(7);
 
   private final int index;
 

@@ -1,5 +1,7 @@
 package ru.yandex.javacourse.schedule.manager;
 
+import static java.util.Objects.isNull;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,6 +43,9 @@ public class InMemoryHistoryManager implements HistoryManager {
 	}
 
 	private void linkLast(Task task) {
+		if (isNull(task)) {
+			return;
+		}
 		if (nodeMap.containsKey(task.getId())) {
 			removeNode(nodeMap.get(task.getId()));
 		}
