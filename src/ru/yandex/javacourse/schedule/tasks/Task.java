@@ -41,12 +41,6 @@ public class Task {
 		this.status = status;
 	}
 
-	public Task(String name, String description, TaskStatus status) {
-		this.name = name;
-		this.description = description;
-		this.status = status;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -104,19 +98,26 @@ public class Task {
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
 		Task task = (Task) o;
 		return id == task.id && duration == task.duration && name.equals(task.name)
 				&& status == task.status && description.equals(task.description)
 				&& taskType == task.taskType
-				&& startTime.equals(task.startTime);
+				&& Objects.equals(startTime, task.startTime);
+	}
+
+	@Override
+	public int hashCode() {
+		int result = id;
+		result = 31 * result + name.hashCode();
+		result = 31 * result + status.hashCode();
+		result = 31 * result + description.hashCode();
+		result = 31 * result + taskType.hashCode();
+		return result;
 	}
 
 	@Override

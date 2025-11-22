@@ -35,7 +35,7 @@ abstract class TaskManagerTest<T extends TaskManager> {
     subtasks = new ArrayList<>();
     task1 = new Task(1, "Test 1", "Testing task 1", TaskStatus.NEW, START_TIME, 15);
     taskManager.addNewTask(task1);
-    epic2 = new Epic(2, "Epic 1", "Testing epic 1");
+    epic2 = new Epic(2, "Epic 1", "Testing epic 1", TaskStatus.NEW, START_TIME.plusMinutes(15), 30);
     taskManager.addNewEpic(epic2);
     subtask3 = new Subtask(3, "SubTask 1", "Testing SubTask 1", TaskStatus.NEW, EPIC_ID, START_TIME.plusMinutes(15), 15);
     taskManager.addNewSubtask(subtask3);
