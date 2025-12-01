@@ -5,18 +5,18 @@ import java.time.LocalDateTime;
 public class Subtask extends Task {
 	protected int epicId;
 
-	private final TaskType taskType = TaskType.SUBTASK;
-
 	public Subtask(int id, String name, String description, TaskStatus status, int epicId,
 			LocalDateTime startTime, long duration) {
 		super(id, name, description, status, startTime, duration);
 		this.epicId = epicId;
+		taskType = TaskType.SUBTASK;
 	}
 
 	public Subtask(String name, String description, TaskStatus status, int epicId,
 			LocalDateTime startTime, long duration) {
 		super(name, description, status, startTime, duration);
 		this.epicId = epicId;
+		taskType = TaskType.SUBTASK;
 	}
 
 	public int getEpicId() {

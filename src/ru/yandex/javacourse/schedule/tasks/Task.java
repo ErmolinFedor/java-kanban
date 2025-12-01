@@ -11,7 +11,7 @@ public class Task {
 	protected String name;
 	protected TaskStatus status;
 	protected String description;
-	private final TaskType taskType = TaskType.TASK;
+  protected TaskType taskType = TaskType.TASK;
 	protected LocalDateTime startTime;
 	protected long duration;
 
@@ -95,6 +95,10 @@ public class Task {
 
 	public LocalDateTime getEndTime() {
 		return nonNull(startTime) ? startTime.plusMinutes(duration) : null;
+	}
+
+	public void setTaskType(TaskType taskType) {
+		this.taskType = taskType;
 	}
 
 	@Override
