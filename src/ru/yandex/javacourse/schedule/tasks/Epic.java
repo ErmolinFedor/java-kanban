@@ -12,19 +12,20 @@ public class Epic extends Task {
 	protected ArrayList<Integer> subtaskIds = new ArrayList<>();
 	private LocalDateTime endTime;
 
-	private final TaskType taskType = TaskType.EPIC;
-
 	public Epic(int id, String name, String description, TaskStatus status, LocalDateTime startTime, long duration) {
 		super(id, name, description, status, startTime, duration);
 		endTime = startTime.plusMinutes(duration);
+		taskType = TaskType.EPIC;
 	}
 
 	public Epic(String name, String description, LocalDateTime startTime, long duration) {
 		super(name, description, NEW, startTime, duration);
+		taskType = TaskType.EPIC;
 	}
 
 	public Epic(int id, String name, String description) {
 		super(id, name, description, NEW);
+		taskType = TaskType.EPIC;
 	}
 
 	public void addSubtaskId(int id) {

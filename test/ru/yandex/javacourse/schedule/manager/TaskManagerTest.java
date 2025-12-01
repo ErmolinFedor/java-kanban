@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import ru.yandex.javacourse.schedule.exeptions.OverlapTasksException;
 import ru.yandex.javacourse.schedule.tasks.Epic;
 import ru.yandex.javacourse.schedule.tasks.Subtask;
 import ru.yandex.javacourse.schedule.tasks.Task;
@@ -267,7 +268,7 @@ abstract class TaskManagerTest<T extends TaskManager> {
     Task task2 = new Task(5, "Test 2", "Testing task 2",
         TaskStatus.NEW, LocalDateTime.parse(startTime), Long.parseLong(duration));
 
-    RuntimeException exception = assertThrows(RuntimeException.class,
+    OverlapTasksException exception = assertThrows(OverlapTasksException.class,
         () -> {
           taskManager.addNewTask(task2);
         });

@@ -14,6 +14,7 @@ import java.util.Map;
 
 import java.util.Set;
 import java.util.TreeSet;
+import ru.yandex.javacourse.schedule.exeptions.OverlapTasksException;
 import ru.yandex.javacourse.schedule.tasks.Epic;
 import ru.yandex.javacourse.schedule.tasks.Subtask;
 import ru.yandex.javacourse.schedule.tasks.Task;
@@ -83,9 +84,7 @@ public class InMemoryTaskManager implements TaskManager {
 	@Override
 	public int addNewTask(Task task) {
     if (!validate(task)) {
-      throw new RuntimeException(
-          "Время выполнения задачи пересекается со временем уже существующей задачи. "
-              + "Выберите другую дату.");
+      throw new OverlapTasksException();
     }
 		final int id = ++generatorId;
 		task.setId(id);
@@ -106,9 +105,7 @@ public class InMemoryTaskManager implements TaskManager {
 	@Override
 	public Integer addNewSubtask(Subtask subtask) {
     if (!validate(subtask)) {
-      throw new RuntimeException(
-          "Время выполнения задачи пересекается со временем уже существующей задачи. "
-              + "Выберите другую дату.");
+      throw new OverlapTasksException();
     }
 		final int epicId = subtask.getEpicId();
 		Epic epic = epics.get(epicId);

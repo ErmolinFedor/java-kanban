@@ -15,8 +15,8 @@ import static ru.yandex.javacourse.schedule.tasks.TaskStatus.NEW;
 public class InMemoryHistoryManagerTest {
 
     protected final LocalDateTime START_DATE = LocalDateTime.of(2026, 1, 1, 0, 0);
-    HistoryManager historyManager;
-    private List<Task> tasks;
+    protected HistoryManager historyManager;
+    protected List<Task> tasks;
 
     @BeforeEach
     public void initHistoryManager(){
